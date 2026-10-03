@@ -21,11 +21,12 @@
 - [🏛️ System Architecture](#️-system-architecture)
 - [⚡ Automated n8n Orchestration Pipeline](#-automated-n8n-orchestration-pipeline)
 - [🖥️ Executive Web Dashboard Modules](#️-executive-web-dashboard-modules)
-  - [1. Real-Time Intelligence Evaluation Studio](#1-real-time-intelligence-evaluation-studio)
-  - [2. Customer Review Stream & Audit Explorer](#2-customer-review-stream--audit-explorer)
-  - [3. Executive Analytics & Telemetry Hub](#3-executive-analytics--telemetry-hub)
-  - [4. Confidence QA Gate (< 0.60 Human Audit)](#4-confidence-qa-gate--060-human-audit)
-  - [5. SQL Analytical Views & Architecture](#5-sql-analytical-views--architecture)
+  - [1. Hero Landing Page](#1-hero-landing-page)
+  - [2. Real-Time Intelligence Evaluation Studio](#2-real-time-intelligence-evaluation-studio)
+  - [3. Customer Review Stream & Audit Explorer](#3-customer-review-stream--audit-explorer)
+  - [4. Executive Analytics & Telemetry Hub](#4-executive-analytics--telemetry-hub)
+  - [5. Confidence QA Gate (< 0.60 Human Audit)](#5-confidence-qa-gate--060-human-audit)
+  - [6. SQL Analytical Views & Architecture](#6-sql-analytical-views--architecture)
 - [📁 Repository Structure](#-repository-structure)
 - [🚀 Quick Start & Installation](#-quick-start--installation)
   - [Running the Executive Web Dashboard](#running-the-executive-web-dashboard)
@@ -108,7 +109,19 @@ The web dashboard ([`dashboard/`](file:///e:/Amazon_Food_reviews/dashboard)) del
 
 ---
 
-### 1. Real-Time Intelligence Evaluation Studio
+### 1. Hero Landing Page
+
+The executive landing page welcomes operators and business leaders with a luminous editorial layout, brand switcher, global navigation, and an embedded live evaluation studio:
+
+![ReviewPulse AI Hero Landing Page](docs/images/dashboard-hero.png)
+
+- **Global Navigation Bar**: Quick search modal, live review stream toggle, telemetry analytics hub, and PostgreSQL analytical views.
+- **Editorial Brand Typography**: Thoughtful pairing of **Newsreader Italic** serif with high-contrast **Plus Jakarta Sans** and monospace telemetry figures.
+- **Instant Brand Filtering**: One-click switching between monitored brands (*Organic Valley*, *Blue Tokai*, *Artisan Blends*).
+
+---
+
+### 2. Real-Time Intelligence Evaluation Studio
 
 An interactive studio that demonstrates raw customer feedback transforming into structured, actionable intelligence in real time.
 
@@ -125,7 +138,7 @@ An interactive studio that demonstrates raw customer feedback transforming into 
 
 ---
 
-### 2. Customer Review Stream & Audit Explorer
+### 3. Customer Review Stream & Audit Explorer
 
 A searchable and filterable review management interface providing full visibility into processed feedback:
 
@@ -138,7 +151,7 @@ A searchable and filterable review management interface providing full visibilit
 
 ---
 
-### 3. Executive Analytics & Telemetry Hub
+### 4. Executive Analytics & Telemetry Hub
 
 Provides business stakeholders and operations teams with real-time health indicators and root-cause distributions:
 
@@ -151,7 +164,7 @@ Provides business stakeholders and operations teams with real-time health indica
 
 ---
 
-### 4. Confidence QA Gate (< 0.60 Human Audit)
+### 5. Confidence QA Gate (< 0.60 Human Audit)
 
 To prevent automated models from silently skewing business reporting:
 - Reviews with confidence scores `< 0.60` are automatically assigned `needs_review = true`.
@@ -160,7 +173,7 @@ To prevent automated models from silently skewing business reporting:
 
 ---
 
-### 5. SQL Analytical Views & Architecture
+### 6. SQL Analytical Views & Architecture
 
 The dashboard integrates pre-compiled PostgreSQL analytical views synchronized with Supabase:
 - `sentiment_summary`: High-level positive, negative, and audit counts.
@@ -194,12 +207,13 @@ Amazon_Food_reviews/
 │   ├── index.html                  # Typography: Plus Jakarta Sans, Newsreader, Inter, JetBrains Mono
 │   └── package.json
 ├── docs/
-│   └── images/                     # Screenshots for Documentation
-│       ├── dashboard-hero.png
-│       ├── n8n-workflow-execution.png
-│       ├── dashboard-demonstrator-studio.png
-│       ├── dashboard-review-stream.png
-│       └── dashboard-analytics-hub.png
+│   └── images/                     # High-Resolution Architectural & UI Screenshots
+│       ├── dashboard-hero.png       # Executive Hero Landing Page Screenshot
+│       ├── hero-page.png            # High-Resolution Hero Showcase Preview
+│       ├── n8n-workflow-execution.png # End-to-End n8n Orchestration Workflow Execution
+│       ├── dashboard-demonstrator-studio.png # Real-Time Intelligence Evaluation Studio
+│       ├── dashboard-review-stream.png      # Review Stream & Audit Explorer (Table & Grid)
+│       └── dashboard-analytics-hub.png      # Executive Analytics & Pareto Rankings Hub
 ├── reviews_sample_500.csv          # Stratified Balanced Sample (100 reviews per star rating 1-5)
 ├── reviews_test_10.csv             # 10-Row Test Dataset for Rapid Pipeline Testing
 ├── create_sample_dataset.py        # Python Sampler Extracting Balanced Datasets
