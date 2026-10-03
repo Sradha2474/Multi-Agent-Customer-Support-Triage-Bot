@@ -1,4 +1,4 @@
-# ⚡ ReviewPulse AI — Real-Time Customer Review & Insight Pipeline
+# ⚡ ReviewPulse AI — Automated Customer Sentiment & Insight Pipeline
 
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![React](https://img.shields.io/badge/React-19.0-61DAFB?style=flat&logo=react&logoColor=black)](https://react.dev/)
@@ -8,40 +8,45 @@
 [![n8n](https://img.shields.io/badge/Orchestration-n8n_Automations-EA4B71?style=flat&logo=n8n&logoColor=white)](https://n8n.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-> An end-to-end, production-grade NLP intelligence pipeline and modern executive dashboard that ingests raw customer reviews across Amazon Fine Foods & Flipkart, classifies sentiment at sub-50ms speeds, isolates operational root-cause complaints via Groq Llama 3.1, enforces confidence safety gates, and powers live analytical views, Slack digests, and interactive judge demonstrators.
+> **ReviewPulse AI** is an enterprise-grade automated NLP customer review intelligence platform. It combines a sub-50ms lightweight classifier, a Groq-accelerated Llama 3.1 8B diagnostic engine, automated confidence quality gates, n8n workflow orchestration, and an executive React dashboard.
+
+---
+
+![ReviewPulse AI Executive Dashboard](docs/images/dashboard-hero.png)
 
 ---
 
 ## 📖 Table of Contents
-- [🎯 About the Project](#-about-the-project)
+- [🎯 Executive Overview](#-executive-overview)
 - [🏛️ System Architecture](#️-system-architecture)
-- [🖥️ ReviewPulse Dashboard Overview](#️-reviewpulse-dashboard-overview)
-  - [1. Editorial Hero & "Put This ➔ Get That" Studio](#1-editorial-hero--put-this--get-that-studio)
-  - [2. Review Stream & Audit Explorer](#2-review-stream--audit-explorer)
-  - [3. Executive Analytics Hub](#3-executive-analytics-hub)
-  - [4. Confidence QA Gate (< 0.60)](#4-confidence-qa-gate--060)
-  - [5. Live Sandbox Playground](#5-live-sandbox-playground)
-  - [6. SQL Views & Pipeline Architecture](#6-sql-views--pipeline-architecture)
+- [⚡ Automated n8n Orchestration Pipeline](#-automated-n8n-orchestration-pipeline)
+- [🖥️ Executive Web Dashboard Modules](#️-executive-web-dashboard-modules)
+  - [1. Real-Time Intelligence Evaluation Studio](#1-real-time-intelligence-evaluation-studio)
+  - [2. Customer Review Stream & Audit Explorer](#2-customer-review-stream--audit-explorer)
+  - [3. Executive Analytics & Telemetry Hub](#3-executive-analytics--telemetry-hub)
+  - [4. Confidence QA Gate (< 0.60 Human Audit)](#4-confidence-qa-gate--060-human-audit)
+  - [5. SQL Analytical Views & Architecture](#5-sql-analytical-views--architecture)
 - [📁 Repository Structure](#-repository-structure)
-- [🚀 Quick Start & Running Locally](#-quick-start--running-locally)
-  - [Option 1: Launch the Web Dashboard](#option-1-launch-the-web-dashboard)
-  - [Option 2: Run the Standalone Python Pipeline](#option-2-run-the-standalone-python-pipeline)
-  - [Option 3: Run Orchestrated n8n Workflows](#option-3-run-orchestrated-n8n-workflows)
-- [🛠️ Database Schema & Analytical Views](#️-database-schema--analytical-views)
-- [💡 Key Engineering & Architectural Highlights](#-key-engineering--architectural-highlights)
+- [🚀 Quick Start & Installation](#-quick-start--installation)
+  - [Running the Executive Web Dashboard](#running-the-executive-web-dashboard)
+  - [Running the Standalone Python Pipeline](#running-the-standalone-python-pipeline)
+  - [Importing n8n Automations](#importing-n8n-automations)
+- [🛠️ Database Schema & SQL Views](#️-database-schema--sql-views)
+- [💡 Engineering Highlights](#-engineering-highlights)
+- [📄 License](#-license)
 
 ---
 
-## 🎯 About The Project
+## 🎯 Executive Overview
 
-E-commerce brands routinely receive thousands of unstructured reviews daily. Traditional triage workflows either rely on slow manual inspection or brute-force LLM prompts that introduce prohibitive latency (2–5 seconds) and high token costs.
+E-commerce businesses routinely receive thousands of customer reviews every day across platforms like Amazon and Flipkart. Manual review triage is prohibitively slow, while processing raw text through large language models alone introduces high token costs and 2–5 second API latency lags.
 
-**ReviewPulse AI solves this with a two-tier hybrid NLP pipeline paired with an executive web dashboard**:
+**ReviewPulse AI implements a two-tier hybrid NLP pipeline that maximizes both speed and depth**:
 
-1. **Tier 1 — Sub-50ms Sentiment Classification**: A lightweight, fine-tuned **DistilBERT SST-2** model scores raw sentiment and confidence in single-digit milliseconds for fractions of a cent.
-2. **Tier 2 — High-Value Root-Cause Diagnosis**: **Groq-accelerated Llama 3.1 8B** is selectively triggered strictly for high-value structured intelligence—extracting root-cause operational complaints, key hashtags, and concise executive summaries.
-3. **Quality Assurance Safety Gate**: An automated threshold gate flags borderline reviews (`confidence < 0.60`) for human auditor verification, eliminating silent model drift.
-4. **Demostack Production Dashboard**: Built with a luminous light theme, modern typography (**Plus Jakarta Sans**, **Newsreader Italic Serif**, **Inter**, **JetBrains Mono**), floating collapsible sidebar, `⌘K` global search, and a live **"Put This ➔ Get That"** demonstrator studio for live evaluation.
+1. **Tier-1 Fast Classification (DistilBERT SST-2)**: Evaluates customer sentiment and statistical confidence in single-digit milliseconds for fractions of a cent per request.
+2. **Confidence Quality Gate (< 0.60)**: Automatically routes ambiguous reviews to a human verification queue, safeguarding business metrics against misclassifications.
+3. **Tier-2 Deep Diagnostic Extraction (Groq Llama 3.1 8B)**: Selectively isolates operational root causes (e.g., transit packaging leaks, defective seals), categorizes key topic hashtags, and produces concise executive summaries.
+4. **Automated Persistence & Alerts**: Synchronizes enriched data to PostgreSQL/Supabase and dispatches scheduled morning digests directly to Slack channels.
 
 ---
 
@@ -49,73 +54,119 @@ E-commerce brands routinely receive thousands of unstructured reviews daily. Tra
 
 ```mermaid
 flowchart TD
-    subgraph INGESTION["1. Review Ingestion & Stratified Sampling"]
-        A["Amazon Fine Foods & Flipkart Dataset\n(reviews_sample_500.csv)"] --> B["Text Sanitization Engine\nRegex HTML & Whitespace Stripper"]
+    subgraph INGESTION["1. Ingestion & Stratified Preprocessing"]
+        A["Amazon Fine Foods & Flipkart Dataset\n(Stratified Balanced Subsets)"] --> B["Regex Sanitization Engine\nHTML Tag Stripping & Normalization"]
     end
 
     subgraph TIER1["2. Tier-1 NLP Sentiment Scoring"]
-        B --> C["DistilBERT SST-2 English\nSub-50ms Inference"]
-        C --> D{"Confidence Quality Gate\nConfidence >= 0.60?"}
-        D -- "Yes (High Confidence)" --> E["QA Status: PASSED"]
-        D -- "No (Borderline / Ambiguous)" --> F["QA Status: FLAGGED AUDIT\nneeds_review = true"]
+        B --> C["Hugging Face Inference API\nDistilBERT SST-2 (Sub-50ms)"]
+        C --> D{"Confidence Quality Gate\nScore >= 0.60?"}
+        D -- "Pass (>= 0.60)" --> E["High-Confidence Verified"]
+        D -- "Fail (< 0.60)" --> F["Flagged for Human Audit\nneeds_review = true"]
     end
 
-    subgraph TIER2["3. Tier-2 LLM Intelligence Extraction"]
-        E --> G["Groq Llama 3.1 8B Instant\nStructured JSON Mode"]
+    subgraph TIER2["3. Tier-2 LLM Root-Cause Extraction"]
+        E --> G["Groq Llama 3.1 8B Instant\nStructured JSON Schema Enforcement"]
         F --> G
-        G --> H["Extracted Structured Intelligence\n• Root Cause Complaint\n• Key Topic Hashtags\n• Executive Summary"]
+        G --> H["Structured Intelligence Payload:\n• Root Cause Operational Complaint\n• Key Topic Categorization\n• Single-Sentence Executive Summary"]
     end
 
-    subgraph STORAGE["4. Persistence & SQL Views"]
+    subgraph STORAGE["4. PostgreSQL Storage & Views"]
         H --> I[("Supabase / PostgreSQL Database\nraw_reviews + processed_reviews")]
-        I --> J["Analytical Views:\n• sentiment_summary\n• top_topics\n• daily_trend\n• products_by_sentiment"]
+        I --> J["Pre-Compiled SQL Views:\n• sentiment_summary\n• top_topics\n• daily_trend\n• products_by_sentiment"]
     end
 
-    subgraph PRESENTATION["5. Delivery & Dashboards"]
-        J --> K["ReviewPulse React Dashboard\n(Vite + Demostack Design System)"]
-        J --> L["Metabase BI Analytics\nDonuts, Trends & Trouble Spots"]
-        J --> M["n8n Daily Cron (09:00 AM)\nAutomated Slack Digest Webhook"]
+    subgraph DELIVERY["5. Delivery & Dashboards"]
+        J --> K["ReviewPulse Executive Dashboard\n(Vite + React + Demostack Design)"]
+        J --> L["Metabase BI Analytics Hub\nPareto Rankings & Donut Ratios"]
+        J --> M["Automated Scheduled Digest\n(n8n Cron ➔ Slack Webhook)"]
     end
 ```
 
 ---
 
-## 🖥️ ReviewPulse Dashboard Overview
+## ⚡ Automated n8n Orchestration Pipeline
 
-The web dashboard ([`dashboard/`](file:///e:/Amazon_Food_reviews/dashboard)) is crafted with an executive light theme and custom typography inspired by the **Demostack design system**.
+The entire review processing flow is orchestrated as an automated workflow using **n8n**:
 
-### 1. Editorial Hero & "Put This ➔ Get That" Studio
-- **Editorial Typography**: Watermelon-style headline pairing geometric sans-serif with an elegant **Newsreader** blue italic serif (*"Transforming Customer Voice Into Real-Time Actionable Intelligence"*).
-- **3D Ambient Flowing Backdrop**: Curated translucent glass ribbons with golden amber drops matching executive aesthetics.
-- **Interactive Demonstrator Studio Card**:
-  - **Clickable Presets**: Instantly run sample reviews:
-    - `🚨 Package Leak` (1-Star olive oil packaging disaster).
-    - `⚠️ Ambiguous (< 0.60)` (3-Star coffee review triggering the QA audit gate).
-    - `⭐ 5-Star Roast` (5-Star snack mix praise).
-  - **Live Pipeline Execution**: Direct browser-to-engine or Groq LLM inference with live sub-50ms latency counter (`Avg ~42ms`).
-  - **Typography Hierarchy**: Field labels and scores in **JetBrains Mono**, review body in **Inter**, and extracted root cause in **Newsreader Italic**.
+![n8n Automated Orchestration Workflow](docs/images/n8n-workflow-execution.png)
 
-### 2. Review Stream & Audit Explorer
-- **Capsule Filter Tabs**: Filter reviews across `All`, `Flagged (<0.60)`, `Complaints`, `Positive`, and `Negative`.
-- **Search & Brand Filtering**: Real-time filtering across brands (*Organic Valley*, *Blue Tokai*, *Artisan Blends*) and star ratings (1 to 5 stars).
-- **Dual Display Modes**: Toggle between interactive **Grid Cards** and a dense **Executive List Table**.
-- **One-Click Actions**: Ingest new reviews, toggle human audit flags, and export filtered datasets directly to CSV.
+### Workflow Execution Stages:
+1. **Manual / Webhook Ingestion**: Receives incoming review batches from e-commerce feeds or CSV uploads.
+2. **Text Sanitization & Staging**: Cleans noise via regex and commits the immutable review to `raw_reviews`.
+3. **DistilBERT Inference**: Dispatches sanitized text to the Hugging Face Inference API for sub-50ms classification.
+4. **Confidence Evaluation**: Evaluates confidence against the `0.60` threshold and tags records accordingly.
+5. **Groq Llama 3.1 Diagnostic Node**: Invokes Llama 3.1 in strict JSON mode to extract complaints and hashtags.
+6. **Defensive Parsing & Storage**: Safely parses the JSON output and updates the Supabase/PostgreSQL database in ~175ms.
+7. **Rate Limit Throttling**: Implements wait states to ensure reliable compliance with upstream API rate limits.
 
-### 3. Executive Analytics Hub
-- **KPI Telemetry Cards**: Total Ingested Reviews, Positive Ratio, Negative Complaint Rate, and Flagged QA Audit count.
-- **Sentiment Ratio Visualization**: Donut breakdown displaying positive vs. negative distributions.
-- **Complaint Pareto Ranking**: Frequency distribution of root causes (*packaging*, *leakage*, *stale*, *delivery delay*).
-- **Product Problem Leaderboard**: Highlights SKUs with highest negative ratios for rapid operations triage.
+---
 
-### 4. Confidence QA Gate (< 0.60)
-- Demonstrates how the pipeline automatically prevents hallucinated or low-confidence classifications from skewing business analytics.
-- Reviews with confidence `< 0.60` receive an amber `⚠️ FLAGGED AUDIT` badge and are routed to a dedicated human review queue.
+## 🖥️ Executive Web Dashboard Modules
 
-### 5. Live Sandbox Playground
-- An interactive workbench allowing engineers and product managers to test custom review text, adjust star ratings, tweak confidence thresholds, and evaluate Groq Llama 3.1 prompts in real time.
+The web dashboard ([`dashboard/`](file:///e:/Amazon_Food_reviews/dashboard)) delivers a complete operational management suite designed with a luminous light theme and modern typography (**Plus Jakarta Sans**, **Newsreader Italic Serif**, **Inter**, and **JetBrains Mono**).
 
-### 6. SQL Views & Pipeline Architecture
-- View and copy pre-compiled PostgreSQL schema definitions, DDL scripts, and view queries directly into Supabase, Metabase, or external data warehouses.
+---
+
+### 1. Real-Time Intelligence Evaluation Studio
+
+An interactive studio that demonstrates raw customer feedback transforming into structured, actionable intelligence in real time.
+
+![Live Pipeline Demonstrator Studio](docs/images/dashboard-demonstrator-studio.png)
+
+- **Interactive Preset Scenarios**:
+  - `🚨 Package Leak`: 1-star packaging transit defect with immediate root-cause isolation.
+  - `⚠️ Ambiguous (< 0.60)`: Borderline review triggering the automated confidence QA safety gate.
+  - `⭐ 5-Star Roast`: Positive customer sentiment confirming zero critical operational complaints.
+- **Dual Pane Layout**:
+  - **Left (Input)**: Product selection, interactive 5-star rating, and raw review text input.
+  - **Right (Output)**: Sentiment pill, monospace confidence score (`98.4%`), QA audit gate status, Llama 3.1 root-cause diagnosis quote, topic chips, and executive summary.
+- **Live Ingestion**: One-click commitment of evaluated reviews directly into the live review stream.
+
+---
+
+### 2. Customer Review Stream & Audit Explorer
+
+A searchable and filterable review management interface providing full visibility into processed feedback:
+
+![Review Stream & Audit Explorer](docs/images/dashboard-review-stream.png)
+
+- **Capsule Quick Filters**: Instantly switch between `All Reviews`, `Flagged (< 0.60)`, `With Complaints`, `Positive`, and `Negative`.
+- **Granular Controls**: Filter by brand (*Organic Valley*, *Blue Tokai*, *Artisan Blends*), star ratings (1–5 stars), and text search.
+- **Dual Display Modes**: Toggle between visual card grids and dense executive table views.
+- **Export to CSV**: Export filtered datasets with full NLP annotations for offline analysis.
+
+---
+
+### 3. Executive Analytics & Telemetry Hub
+
+Provides business stakeholders and operations teams with real-time health indicators and root-cause distributions:
+
+![Executive Analytics Hub](docs/images/dashboard-analytics-hub.png)
+
+- **KPI Telemetry Cards**: Tracks total ingested reviews, positive vs. negative sentiment balance, and audit counts.
+- **Quality Ratios**: Donut visualization displaying sentiment distributions.
+- **Star Rating vs. NLP Sentiment Matrix**: Detects sarcasm and discrepancies between numerical star ratings and actual customer text.
+- **Complaint Pareto Rankings**: Isolates frequent operational issues (e.g. *packaging*, *leakage*, *shipping delays*).
+
+---
+
+### 4. Confidence QA Gate (< 0.60 Human Audit)
+
+To prevent automated models from silently skewing business reporting:
+- Reviews with confidence scores `< 0.60` are automatically assigned `needs_review = true`.
+- An amber `⚠️ FLAGGED AUDIT` badge is applied to alert compliance and QA teams.
+- Auditors can verify or reclassify flagged items with a single click.
+
+---
+
+### 5. SQL Analytical Views & Architecture
+
+The dashboard integrates pre-compiled PostgreSQL analytical views synchronized with Supabase:
+- `sentiment_summary`: High-level positive, negative, and audit counts.
+- `top_topics`: Aggregated frequency counts and complaint mentions per hashtag.
+- `daily_trend`: Time-series sentiment trends across ingestion timestamps.
+- `products_by_sentiment`: SKU-level sentiment breakdown to rapidly detect defective batches.
 
 ---
 
@@ -126,38 +177,46 @@ Amazon_Food_reviews/
 ├── dashboard/                      # Modern React + Vite Executive Web Dashboard
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── Hero.jsx            # Editorial Hero & "Put This -> Get That" Studio
-│   │   │   ├── KpiMetrics.jsx      # KPI Telemetry Cards & Metrics
-│   │   │   ├── demostack/
-│   │   │   │   ├── DemostackSidebar.jsx  # Floating collapsible navigation sidebar
-│   │   │   │   ├── DemostackTopbar.jsx   # Topbar with ⌘K search & live actions
-│   │   │   │   ├── DemostackCardView.jsx # Review Stream (Grid/Table views & CSV export)
-│   │   │   │   ├── ArchitectureView.jsx  # SQL Views & Pipeline Architecture viewer
-│   │   │   │   └── DemostackIcons.jsx    # SVG icons matching Demostack registry
-│   │   │   └── ...
+│   │   │   ├── Hero.jsx            # Editorial Hero & Live Demonstrator Studio
+│   │   │   ├── KpiMetrics.jsx      # Telemetry Cards & Metrics
+│   │   │   ├── SettingsModal.jsx   # API Credentials & Connection Modal
+│   │   │   └── demostack/
+│   │   │       ├── DemostackSidebar.jsx  # Floating Collapsible Navigation Sidebar
+│   │   │       ├── DemostackTopbar.jsx   # Topbar with Search & Actions
+│   │   │       ├── DemostackCardView.jsx # Review Stream (Grid & Table with CSV Export)
+│   │   │       ├── ArchitectureView.jsx  # SQL Views & Schema Viewer
+│   │   │       └── DemostackIcons.jsx    # SVG Asset Library
 │   │   ├── utils/
-│   │   │   └── pipelineEngine.js   # Client-side NLP & Groq Llama 3.1 pipeline runner
-│   │   ├── assets/                 # Ambient background images & static assets
-│   │   ├── index.css               # Full Demostack light design system & typography tokens
-│   │   └── App.jsx                 # Main application state & tab coordinator
-│   ├── index.html                  # Google Fonts: Plus Jakarta Sans, Newsreader, Inter, JetBrains Mono
+│   │   │   └── pipelineEngine.js   # Client-Side NLP & Groq Llama 3.1 Runner
+│   │   ├── assets/                 # Ambient Visual Assets & Photographic Backdrops
+│   │   ├── index.css               # Demostack Design System Tokens & Styles
+│   │   └── App.jsx                 # Application Root State & Navigation
+│   ├── index.html                  # Typography: Plus Jakarta Sans, Newsreader, Inter, JetBrains Mono
 │   └── package.json
-├── reviews_sample_500.csv          # Stratified balanced sample (100 reviews per rating 1-5, 500 total)
-├── reviews_test_10.csv             # 10-row test dataset (2 per rating) for rapid dry-runs
-├── create_sample_dataset.py        # Stratified sampling script extracting balanced sets from raw data
-├── schema.sql                      # Supabase / PostgreSQL DDL creating tables and 4 analytical views
-├── n8n_review_pipeline.json        # Import-ready n8n workflow (HF DistilBERT + Groq Llama 3.1 + Postgres)
-├── n8n_slack_digest.json           # Import-ready n8n workflow for scheduled daily Slack digests
-├── run_pipeline_local.py           # Standalone Python local pipeline tester with dry-run support
-├── .env.example                    # Environment variable template
-└── README.md                       # Comprehensive project documentation
+├── docs/
+│   └── images/                     # Screenshots for Documentation
+│       ├── dashboard-hero.png
+│       ├── n8n-workflow-execution.png
+│       ├── dashboard-demonstrator-studio.png
+│       ├── dashboard-review-stream.png
+│       └── dashboard-analytics-hub.png
+├── reviews_sample_500.csv          # Stratified Balanced Sample (100 reviews per star rating 1-5)
+├── reviews_test_10.csv             # 10-Row Test Dataset for Rapid Pipeline Testing
+├── create_sample_dataset.py        # Python Sampler Extracting Balanced Datasets
+├── schema.sql                      # PostgreSQL DDL for Tables and 4 Analytical Views
+├── n8n_review_pipeline.json        # Import-Ready n8n Pipeline Workflow
+├── n8n_slack_digest.json           # Import-Ready n8n Scheduled Slack Digest Workflow
+├── run_pipeline_local.py           # Standalone Python Local Pipeline Runner
+├── .env.example                    # Environment Variable Template
+├── .gitignore                      # Security Ignore Rules (Excludes Secrets and >100MB Datasets)
+└── README.md                       # Comprehensive Project Documentation
 ```
 
 ---
 
-## 🚀 Quick Start & Running Locally
+## 🚀 Quick Start & Installation
 
-### Option 1: Launch the Web Dashboard
+### Running the Executive Web Dashboard
 
 1. **Navigate to the dashboard directory**:
    ```bash
@@ -169,14 +228,14 @@ Amazon_Food_reviews/
    npm install
    ```
 
-3. **Configure environment variables**:
+3. **Configure API Keys (Optional)**:
    Create a `dashboard/.env` file:
    ```env
    VITE_GROQ_API_KEY=your_groq_api_key_here
    ```
-   *(Get your free Groq API key from [console.groq.com](https://console.groq.com). If left empty, the dashboard seamlessly uses local deterministic NLP simulation for zero-configuration testing.)*
+   *(Get a free Groq key from [console.groq.com](https://console.groq.com). If left blank, the dashboard automatically utilizes local deterministic NLP simulation for testing without external dependencies).*
 
-4. **Start the development server**:
+4. **Launch development server**:
    ```bash
    npm run dev
    ```
@@ -184,72 +243,61 @@ Amazon_Food_reviews/
 
 ---
 
-### Option 2: Run the Standalone Python Pipeline
-
-Test the NLP classification and Groq LLM extraction directly from your terminal:
+### Running the Standalone Python Pipeline
 
 1. **Set up virtual environment & install requirements**:
    ```bash
    python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   source venv/bin/activate  # Windows: venv\Scripts\activate
    pip install requests python-dotenv
    ```
 
-2. **Run a dry-run test (no external API calls required)**:
+2. **Execute dry-run validation (No API keys required)**:
    ```bash
    python run_pipeline_local.py --dry-run
    ```
 
-3. **Run live validation with Groq & Hugging Face**:
-   Configure `.env` with your API keys, then execute:
+3. **Execute live API validation**:
+   Add your keys to `.env`, then run:
    ```bash
    python run_pipeline_local.py --input reviews_test_10.csv
    ```
 
 ---
 
-### Option 3: Run Orchestrated n8n Workflows
+### Importing n8n Automations
 
-1. **Start n8n** via Docker or NPX:
-   ```bash
-   npx n8n
-   # or: docker run -it --rm -p 5678:5678 n8nio/n8n
-   ```
-2. Open `http://localhost:5678`.
-3. In the top-right menu, select **Import from File** and import:
-   - [`n8n_review_pipeline.json`](file:///e:/Amazon_Food_reviews/n8n_review_pipeline.json) — Full batch ingestion, DistilBERT classification, QA confidence branching, and Groq LLM extraction.
-   - [`n8n_slack_digest.json`](file:///e:/Amazon_Food_reviews/n8n_slack_digest.json) — Daily 9:00 AM automated executive Slack digest query.
-4. Add your **Postgres (Supabase)**, **Hugging Face**, and **Groq** credentials in n8n and click **Test step**.
+1. Start an n8n instance (`npx n8n` or via Docker).
+2. Open `http://localhost:5678` and select **Import from File**.
+3. Import [`n8n_review_pipeline.json`](file:///e:/Amazon_Food_reviews/n8n_review_pipeline.json) for review processing.
+4. Import [`n8n_slack_digest.json`](file:///e:/Amazon_Food_reviews/n8n_slack_digest.json) for automated daily Slack reports.
 
 ---
 
-## 🛠️ Database Schema & Analytical Views
+## 🛠️ Database Schema & SQL Views
 
-Execute [`schema.sql`](file:///e:/Amazon_Food_reviews/schema.sql) in your Supabase SQL Editor. The schema provisions:
+Run [`schema.sql`](file:///e:/Amazon_Food_reviews/schema.sql) in your Supabase or PostgreSQL SQL editor:
 
-- `raw_reviews`: Immutable staging table capturing raw ingested customer reviews.
-- `processed_reviews`: Sanitized text, sentiment label (`POSITIVE`/`NEGATIVE`), confidence score, `needs_review` boolean, Llama 3.1 extracted complaint, topic hashtags, and executive summary.
-- **4 Analytical SQL Views**:
-  1. `sentiment_summary`: Aggregates total reviews, positive/negative counts, ratios, and flagged QA review totals.
-  2. `top_topics`: Unnests topic arrays to compute frequency counts and negative complaint mentions per topic.
-  3. `daily_trend`: Time-series sentiment distribution aggregated by ingestion date.
-  4. `products_by_sentiment`: SKU-level sentiment breakdown to isolate problematic product batches.
+- **`raw_reviews`**: Immutable log of incoming customer reviews.
+- **`processed_reviews`**: Enriched records containing sentiment labels, confidence scores, audit flags, extracted root-cause complaints, topic arrays, and summaries.
+- **Analytical Views**:
+  - `sentiment_summary`: Overall customer sentiment breakdown.
+  - `top_topics`: Frequency metrics for extracted issue topics.
+  - `daily_trend`: Time-series sentiment movement.
+  - `products_by_sentiment`: Product-level defect rate rankings.
 
 ---
 
-## 💡 Key Engineering & Architectural Highlights
+## 💡 Engineering Highlights
 
-1. **Stratified Sentiment Sampling**:
-   Raw e-commerce datasets are typically skewed with >65% 5-star praise. Our dataset sampler (`create_sample_dataset.py`) extracts an exact balanced distribution of 100 reviews per star rating (1–5), ensuring operational defects and edge cases are represented.
+1. **Stratified Sampling to Eliminate Bias**:
+   Raw customer review datasets typically suffer from >65% 5-star bias. Our sampler (`create_sample_dataset.py`) extracts an exact balanced distribution of 100 reviews per rating (1–5) to ensure negative complaints and borderline reviews are thoroughly represented.
 
-2. **Cost-Optimized Two-Tier Architecture**:
-   Executing an LLM for sentiment classification across 100,000 reviews costs tens of dollars and creates severe API latency. ReviewPulse AI delegates initial classification to millisecond-fast **DistilBERT**, reserving the **Llama 3.1 LLM** exclusively for complex complaint isolation and summarization.
+2. **Cost-Effective Two-Tier Inference**:
+   Running large language models across hundreds of thousands of reviews is cost-prohibitive. Delegating raw classification to **DistilBERT** reduces latency to single-digit milliseconds, reserving **Llama 3.1** strictly for high-value diagnostic reasoning.
 
-3. **Confidence-Aware Safety Gating**:
-   Reviews with confidence scores below `0.60` are automatically tagged with `needs_review = true`, providing enterprise governance and human-in-the-loop auditability.
-
-4. **Defensive Parsing & Fallbacks**:
-   Groq API calls utilize strict JSON schema enforcement with local regex fallbacks, preventing malformed LLM outputs from breaking batch pipelines.
+3. **Defensive Schema Parsing**:
+   Groq API calls utilize strict JSON schema enforcement paired with regex extraction fallbacks, ensuring pipeline stability during high-throughput batch runs.
 
 ---
 
