@@ -1,0 +1,130 @@
+{
+  "name": "Customer Review Daily Slack Digest",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 9 * * *"
+            }
+          ]
+        }
+      },
+      "id": "cron-trigger-1",
+      "name": "Daily at 9:00 AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n  COUNT(*) AS total_reviews,\n  SUM(CASE WHEN sentiment_label = 'POSITIVE' THEN 1 ELSE 0 END) AS positive_count,\n  SUM(CASE WHEN sentiment_label = 'NEGATIVE' THEN 1 ELSE 0 END) AS negative_count,\n  ROUND((SUM(CASE WHEN sentiment_label = 'POSITIVE' THEN 1 ELSE 0 END) * 100.0 / NULLIF(COUNT(*), 0))::numeric, 1) AS positive_pct,\n  ROUND((SUM(CASE WHEN sentiment_label = 'NEGATIVE' THEN 1 ELSE 0 END) * 100.0 / NULLIF(COUNT(*), 0))::numeric, 1) AS negative_pct,\n  SUM(CASE WHEN needs_review = true THEN 1 ELSE 0 END) AS flagged_for_review\nFROM processed_reviews;"
+      },
+      "id": "query-sentiment-1",
+      "name": "Query Sentiment Stats",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [420, 300],
+      "credentials": {
+        "postgres": {
+          "id": "supabase-postgres-cred",
+          "name": "Supabase PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT topic_name, mention_count, negative_mentions\nFROM top_topics\nWHERE negative_mentions > 0\nORDER BY negative_mentions DESC, mention_count DESC\nLIMIT 5;"
+      },
+      "id": "query-topics-1",
+      "name": "Query Top Complaints",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [640, 300],
+      "credentials": {
+        "postgres": {
+          "id": "supabase-postgres-cred",
+          "name": "Supabase PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const stats = $('Query Sentiment Stats').first().json;\nconst topics = $('Query Top Complaints').all().map(i => i.json);\n\nconst total = stats.total_reviews || 0;\nconst posPct = stats.positive_pct || 0;\nconst negPct = stats.negative_pct || 0;\nconst flagged = stats.flagged_for_review || 0;\n\nlet topicList = topics.map(t => `• *${t.topic_name}*: ${t.negative_mentions} negative mentions (${t.mention_count} total)`).join('\\n');\nif (!topicList) {\n  topicList = '• No critical complaint topics detected.';\n}\n\nconst slackText = `*📊 Daily Customer Review & Sentiment Digest*\\n\\n` +\n  `*Sentiment Overview:*\\n` +\n  `• *Total Processed:* ${total} reviews\\n` +\n  `• *Positive:* ${posPct}%  🟢 |  *Negative:* ${negPct}%  🔴\\n` +\n  `• *Flagged for Review (Confidence < 0.6):* ${flagged} reviews ⚠️\\n\\n` +\n  `*Top Recurring Complaints / Pain Points:*\\n` +\n  `${topicList}\\n\\n` +\n  `🔍 <http://localhost:3000|View Live Metabase BI Dashboard>`;\n\nreturn [{\n  json: {\n    text: slackText\n  }\n}];"
+      },
+      "id": "format-message-1",
+      "name": "Format Slack Message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [860, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.SLACK_WEBHOOK_URL || 'https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK' }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"text\": {{ JSON.stringify($json.text) }}\n}",
+        "options": {}
+      },
+      "id": "send-slack-1",
+      "name": "Post to Slack Webhook",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1080, 300]
+    }
+  ],
+  "connections": {
+    "Daily at 9:00 AM": {
+      "main": [
+        [
+          {
+            "node": "Query Sentiment Stats",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query Sentiment Stats": {
+      "main": [
+        [
+          {
+            "node": "Query Top Complaints",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query Top Complaints": {
+      "main": [
+        [
+          {
+            "node": "Format Slack Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Slack Message": {
+      "main": [
+        [
+          {
+            "node": "Post to Slack Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

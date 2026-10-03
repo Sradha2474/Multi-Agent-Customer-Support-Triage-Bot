@@ -1,0 +1,291 @@
+{
+  "name": "Customer Review Sentiment & Insight Pipeline (Final)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "trigger-manual-1",
+      "name": "When clicking \u00e2\u20ac\u02dcTest workflow\u00e2\u20ac\u2122",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        200,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const reviews = [\n  {\n    \"id\": 1,\n    \"product_name\": \"Crompton Hill Briz Deco 1200 mm 3 Blade Ceiling Fan (Sm\",\n    \"rating\": 1,\n    \"review_summary\": \"Useless product\",\n    \"review_text\": \"It is worst fan don't by this fan\",\n    \"uploaded_at\": \"2024-09-02 03:12:00\"\n  },\n  {\n    \"id\": 2,\n    \"product_name\": \"Inalsa Inox 1000 1000 W Food Processor (Silver:Black)\",\n    \"rating\": 2,\n    \"review_summary\": \"Expected a better product\",\n    \"review_text\": \"Don't waste your money. I'm really doubtful of all the positive reviews, as this product is just not good. The plastic used is cheap and 1 of the lids was broken on arrival. I don't think this will last long with daily use. It was a big disappointed to get this.\",\n    \"uploaded_at\": \"2024-09-03 21:12:00\"\n  },\n  {\n    \"id\": 3,\n    \"product_name\": \"Crompton Hill Briz Deco 1200 mm 3 Blade Ceiling Fan (Sm\",\n    \"rating\": 5,\n    \"review_summary\": \"Best in the market!\",\n    \"review_text\": \"Nice 1 day delivery good packing also good thanks to ekart also good speed easy installation you can do by your self\",\n    \"uploaded_at\": \"2024-09-03 03:00:00\"\n  },\n  {\n    \"id\": 4,\n    \"product_name\": \"boAt Blitz 1500 Multimedia 50 W Bluetooth Home Theatre \",\n    \"rating\": 3,\n    \"review_summary\": \"Fair\",\n    \"review_text\": \"As compared to money, this home theater is good.\",\n    \"uploaded_at\": \"2024-09-05 08:12:00\"\n  },\n  {\n    \"id\": 5,\n    \"product_name\": \"boAt Blitz 1500 Multimedia 50 W Bluetooth Home Theatre \",\n    \"rating\": 1,\n    \"review_summary\": \"Worst experience ever!\",\n    \"review_text\": \"low quality low bass don't buy no return policy only replace west of money boat company is best but this product is west.\",\n    \"uploaded_at\": \"2024-09-02 08:48:00\"\n  },\n  {\n    \"id\": 6,\n    \"product_name\": \"Scotch-Brite Plastic Dry Broom (Green)\",\n    \"rating\": 3,\n    \"review_summary\": \"Nice\",\n    \"review_text\": \"The product build quality is good but it has bigger plastic strands. The sweeping experience is not same as normal broom. Suggest to have thinner fibres for better sweeping effect\",\n    \"uploaded_at\": \"2024-09-05 19:24:00\"\n  },\n  {\n    \"id\": 7,\n    \"product_name\": \"Crompton Hill Briz Deco 1200 mm 3 Blade Ceiling Fan (Sm\",\n    \"rating\": 5,\n    \"review_summary\": \"Classy product\",\n    \"review_text\": \"Good finish. Excellent performance. Speed is really 400 rpm. This is my 3rd purchase of this model.\",\n    \"uploaded_at\": \"2024-09-02 21:24:00\"\n  },\n  {\n    \"id\": 8,\n    \"product_name\": \"UPC Upgraded Hands-Free Squeeze Microfiber Flat Spin Mo\",\n    \"rating\": 5,\n    \"review_summary\": \"Classy product\",\n    \"review_text\": \"Excellent mop far better than regular round shape mop It will easily goes in the corners and very easy to use.\",\n    \"uploaded_at\": \"2024-09-02 20:00:00\"\n  },\n  {\n    \"id\": 9,\n    \"product_name\": \"boAt Blitz 1500 Multimedia 50 W Bluetooth Home Theatre \",\n    \"rating\": 5,\n    \"review_summary\": \"Classy product\",\n    \"review_text\": \"Awesome i am happy my biggest diwali gifttt\",\n    \"uploaded_at\": \"2024-09-03 05:48:00\"\n  },\n  {\n    \"id\": 10,\n    \"product_name\": \"Crompton 75 L Desert Air Cooler (White, Teal, ACGC-DAC7\",\n    \"rating\": 5,\n    \"review_summary\": \"Wonderful\",\n    \"review_text\": \"Very good quality product. Better than my expectations. If you provide good ventilation it does nice cooling then. I could feel the air 25 feet away. Couldn't try more than that but i think you could feel it a bit more far away as well. Water easily lasts for about 8-9 hours. Good in this price(9200) range after 10 percent discount.\",\n    \"uploaded_at\": \"2024-09-02 11:36:00\"\n  },\n  {\n    \"id\": 11,\n    \"product_name\": \"Crompton 75 L Desert Air Cooler (White, Teal, ACGC-DAC7\",\n    \"rating\": 5,\n    \"review_summary\": \"Perfect product!\",\n    \"review_text\": \"Air throw is very good. Low noise and best cooling on medium speed. Motor of Fan is partially covered with plastic to protect water fall on it. Original Crompton motor very durable. Water Level can be seen clearly from outside body of cooler. You can fill water very easily from front side of cooler, a big box is available to open and close it after filling water. 55 litre tank is enough for 10 hours cooling. Honey comb pads very good quality. Plastic body is ...\",\n    \"uploaded_at\": \"2024-09-02 01:48:00\"\n  },\n  {\n    \"id\": 12,\n    \"product_name\": \"Crompton 75 L Desert Air Cooler (White, Teal, ACGC-DAC7\",\n    \"rating\": 2,\n    \"review_summary\": \"Waste Cooler\",\n    \"review_text\": \"Don't buy this stupid cooler, very annoying creek sound of fan in cooler and very very short cable... and also very horrible smell for intial 30mins.\",\n    \"uploaded_at\": \"2024-09-01 14:36:00\"\n  },\n  {\n    \"id\": 13,\n    \"product_name\": \"DDARSH ENTERPRISE Wet and Dry Duster Set\",\n    \"rating\": 1,\n    \"review_summary\": \"Useless product\",\n    \"review_text\": \"It is not flexible I don't like it\",\n    \"uploaded_at\": \"2024-09-03 15:36:00\"\n  },\n  {\n    \"id\": 14,\n    \"product_name\": \"DDARSH ENTERPRISE Wet and Dry Duster Set\",\n    \"rating\": 1,\n    \"review_summary\": \"Very poor\",\n    \"review_text\": \"Very cheap and poor quality\",\n    \"uploaded_at\": \"2024-09-01 20:12:00\"\n  },\n  {\n    \"id\": 15,\n    \"product_name\": \"Green Home Reusable Latex Hand Gloves for Kitchen Black\",\n    \"rating\": 2,\n    \"review_summary\": \"Could be way better\",\n    \"review_text\": \"Not good,I hve used only 10 days nd it I'll damage\",\n    \"uploaded_at\": \"2024-09-01 13:12:00\"\n  },\n  {\n    \"id\": 16,\n    \"product_name\": \"Crompton Hill Briz Deco 1200 mm 3 Blade Ceiling Fan (Sm\",\n    \"rating\": 4,\n    \"review_summary\": \"Pretty good\",\n    \"review_text\": \"Good high speed fan in this price, I bought Orient also, that's good also but it has good design in it.\",\n    \"uploaded_at\": \"2024-09-01 17:24:00\"\n  },\n  {\n    \"id\": 17,\n    \"product_name\": \"boAt Blitz 1500 Multimedia 50 W Bluetooth Home Theatre \",\n    \"rating\": 2,\n    \"review_summary\": \"Expected a better product\",\n    \"review_text\": \"Voice not clear when increase volume more than 10....not worth for the cost\",\n    \"uploaded_at\": \"2024-09-04 09:48:00\"\n  },\n  {\n    \"id\": 18,\n    \"product_name\": \"Crompton Hill Briz Deco 1200 mm 3 Blade Ceiling Fan (Sm\",\n    \"rating\": 3,\n    \"review_summary\": \"Decent product\",\n    \"review_text\": \"At first delivery boy who has no seance even he didn't know what is exchange process which was in offer and his behaviour was also poor.After 1 day using the product u can say its moderate cause speed is very fast but air flow not good. Need to stand just 90 below to get some air. Fan is much silent compare to it's speed. One thing i can say crompton is good but usha is the best. I'll go for usha next time. Thank you all.\",\n    \"uploaded_at\": \"2024-09-05 13:48:00\"\n  },\n  {\n    \"id\": 19,\n    \"product_name\": \"Inalsa fiesta 650 W Food Processor (White)\",\n    \"rating\": 3,\n    \"review_summary\": \"Just okay\",\n    \"review_text\": \"prodect same part good same part quality not good Customer support call number not pickup over all not good\",\n    \"uploaded_at\": \"2024-09-05 15:12:00\"\n  },\n  {\n    \"id\": 20,\n    \"product_name\": \"Crompton Hill Briz Deco 1200 mm 3 Blade Ceiling Fan (Sm\",\n    \"rating\": 4,\n    \"review_summary\": \"Delightful\",\n    \"review_text\": \"Reviewing after 2 months.. worth buying..Happy customer :)\",\n    \"uploaded_at\": \"2024-09-02 06:00:00\"\n  },\n  {\n    \"id\": 21,\n    \"product_name\": \"UPC Upgraded Hands-Free Squeeze Microfiber Flat Spin Mo\",\n    \"rating\": 5,\n    \"review_summary\": \"Perfect product!\",\n    \"review_text\": \"Mop built quantity very good\",\n    \"uploaded_at\": \"2024-09-01 21:36:00\"\n  },\n  {\n    \"id\": 22,\n    \"product_name\": \"Crompton Hill Briz Deco 1200 mm 3 Blade Ceiling Fan (Sm\",\n    \"rating\": 5,\n    \"review_summary\": \"Must buy!\",\n    \"review_text\": \"Nice products ...fan speed look like ac ..full cool\",\n    \"uploaded_at\": \"2024-09-02 07:24:00\"\n  },\n  {\n    \"id\": 23,\n    \"product_name\": \"Crompton Hill Briz Deco 1200 mm 3 Blade Ceiling Fan (Sm\",\n    \"rating\": 1,\n    \"review_summary\": \"Utterly Disappointed\",\n    \"review_text\": \"Worst product first time bad experience with Flipkart.Worst packaging and blades are bend looked as used product.I have raised return request but didn't get picked up of the fan yet. I hope it will retun soon I trust flipkart.Thank you\",\n    \"uploaded_at\": \"2024-09-02 18:36:00\"\n  },\n  {\n    \"id\": 24,\n    \"product_name\": \"Crompton 75 L Desert Air Cooler (White, Teal, ACGC-DAC7\",\n    \"rating\": 1,\n    \"review_summary\": \"Utterly Disappointed\",\n    \"review_text\": \"Never purchase cooler from FlipkartMy 10500 wastedPump not working, honey comb dry,not giving cool air,the up and down slider is also not working when you manually do it up it Will go down itself after few minutes giving only air in downwardI am a regular Flipkart customer and was trusting Flipkart but after this cooler purchasing experience i hate Flipkart from now and I'll never do any order at FlipkartI've requested for return that was 7 days replacement policy butTechnician came and...\",\n    \"uploaded_at\": \"2024-09-03 08:36:00\"\n  },\n  {\n    \"id\": 25,\n    \"product_name\": \"boAt Blitz 1500 Multimedia 50 W Bluetooth Home Theatre \",\n    \"rating\": 4,\n    \"review_summary\": \"Value-for-money\",\n    \"review_text\": \"Thanks flipkart nice product\",\n    \"uploaded_at\": \"2024-09-03 04:24:00\"\n  },\n  {\n    \"id\": 26,\n    \"product_name\": \"Sheen Microfiber cleaning cloth pack of 6 Dry Cotton Cl\",\n    \"rating\": 4,\n    \"review_summary\": \"Really Nice\",\n    \"review_text\": \"Very nice n soft .it is worth for money.\",\n    \"uploaded_at\": \"2024-09-01 09:00:00\"\n  },\n  {\n    \"id\": 27,\n    \"product_name\": \"Sheen Microfiber cleaning cloth pack of 6 Dry Cotton Cl\",\n    \"rating\": 3,\n    \"review_summary\": \"Just okay\",\n    \"review_text\": \"Quality is ok but small size\",\n    \"uploaded_at\": \"2024-09-04 22:24:00\"\n  },\n  {\n    \"id\": 28,\n    \"product_name\": \"Crompton 75 L Desert Air Cooler (White, Teal, ACGC-DAC7\",\n    \"rating\": 3,\n    \"review_summary\": \"Fair\",\n    \"review_text\": \"genuine feedback- cooler is not so cool, but below average, it can prevent only the hot air blown by nature. during hot climate in summer u can get the air like rainy day nothing else,\",\n    \"uploaded_at\": \"2024-09-02 22:48:00\"\n  },\n  {\n    \"id\": 29,\n    \"product_name\": \"CEAT Hitman Full Size Double Blade Poplar Cricket Bat -\",\n    \"rating\": 2,\n    \"review_summary\": \"Expected a better product\",\n    \"review_text\": \"Not bad good product but need to be maintain\",\n    \"uploaded_at\": \"2024-09-03 07:12:00\"\n  },\n  {\n    \"id\": 30,\n    \"product_name\": \"Crompton Hill Briz Deco 1200 mm 3 Blade Ceiling Fan (Sm\",\n    \"rating\": 4,\n    \"review_summary\": \"Pretty good\",\n    \"review_text\": \"Super fine look and Lesser in noisemaking, but the fan upper cover and condenser fan guards made of plastics was not there on 3 of 1 so little bit disappointed. The Crompton super briz at it s best\",\n    \"uploaded_at\": \"2024-09-01 16:00:00\"\n  },\n  {\n    \"id\": 31,\n    \"product_name\": \"boAt Blitz 1500 Multimedia 50 W Bluetooth Home Theatre \",\n    \"rating\": 4,\n    \"review_summary\": \"Worth the money\",\n    \"review_text\": \"Bass is poor.. Bulid quality is very good.Suitable for 10 10 roomBluetooth connection is more than 30 M.. Excellent .Sound quality good.I suggest improve bass woofer quality and safe guard provision for protecting speakers.\",\n    \"uploaded_at\": \"2024-09-03 01:36:00\"\n  },\n  {\n    \"id\": 32,\n    \"product_name\": \"Inalsa Easy Prep_ 800 W Food Processor (Black)\",\n    \"rating\": 2,\n    \"review_summary\": \"Moderate\",\n    \"review_text\": \"Plastic attachments is very poor guilty\",\n    \"uploaded_at\": \"2024-09-02 00:24:00\"\n  },\n  {\n    \"id\": 33,\n    \"product_name\": \"Crompton 75 L Desert Air Cooler (White, Teal, ACGC-DAC7\",\n    \"rating\": 3,\n    \"review_summary\": \"Nice\",\n    \"review_text\": \"Pros, the best cooling out there with 75L liter capacity. And plastic used is also really good. Cons, plugg in cable length is not even half meter and huge noise which will not allow you to sleep. So what is the point. It is like giving you an AK47 without bullet. You have a wonderful gun but you cannot use it for the purpose you got it for.\",\n    \"uploaded_at\": \"2024-09-03 14:12:00\"\n  },\n  {\n    \"id\": 34,\n    \"product_name\": \"Donizard store Wet and Dry Glove Set (Free Size Pack of\",\n    \"rating\": 1,\n    \"review_summary\": \"Don't waste your money\",\n    \"review_text\": \"Very poor quality of this product !Waste of money\",\n    \"uploaded_at\": \"2024-09-01 10:24:00\"\n  },\n  {\n    \"id\": 35,\n    \"product_name\": \"Crompton Hill Briz Deco 1200 mm 3 Blade Ceiling Fan (Sm\",\n    \"rating\": 5,\n    \"review_summary\": \"Classy product\",\n    \"review_text\": \"Crompton product needs no introduction.Great value for moneyProspowerful motorCoverage(covers more area of your room)Less noisySuper anti corrosion ColoradoGood LookingConsCould not find one\",\n    \"uploaded_at\": \"2024-09-02 14:24:00\"\n  },\n  {\n    \"id\": 36,\n    \"product_name\": \"Spotzero by Milton Refill (Grey)\",\n    \"rating\": 4,\n    \"review_summary\": \"Worth the money\",\n    \"review_text\": \"This product is good. And delivery is very good. It delivered very soon. But it is some hard to fix\",\n    \"uploaded_at\": \"2024-09-01 11:48:00\"\n  },\n  {\n    \"id\": 37,\n    \"product_name\": \"Crompton 75 L Desert Air Cooler (White, Teal, ACGC-DAC7\",\n    \"rating\": 3,\n    \"review_summary\": \"Just okay\",\n    \"review_text\": \"Writing this review after using this cooler for 4+ months in Nagpur (where temperature goes till 48 degrees and is an extremely hot region).Light weight, sturdy, stylish, does not make a lot of noise either. This cooler will work absolutely fine until March. But during the months of April and May, when summer will be at its peak, it will work only as a personal cooler, and you'll have to keep it hardly 1 meter away from yourself to feel the cool air.\",\n    \"uploaded_at\": \"2024-09-04 18:12:00\"\n  },\n  {\n    \"id\": 38,\n    \"product_name\": \"Sheen Microfiber cleaning cloth pack of 6 Dry Cotton Cl\",\n    \"rating\": 1,\n    \"review_summary\": \"Terrible product\",\n    \"review_text\": \"Very bad Quality, please don't buy\",\n    \"uploaded_at\": \"2024-09-03 12:48:00\"\n  },\n  {\n    \"id\": 39,\n    \"product_name\": \"DDARSH ENTERPRISE Wet and Dry Duster Set\",\n    \"rating\": 4,\n    \"review_summary\": \"Nice product\",\n    \"review_text\": \"Good Product. Thanks Flipkart.\",\n    \"uploaded_at\": \"2024-09-02 17:12:00\"\n  },\n  {\n    \"id\": 40,\n    \"product_name\": \"USHA FP 3811_ 1000 W Food Processor (Black, Silver)\",\n    \"rating\": 2,\n    \"review_summary\": \"Moderate\",\n    \"review_text\": \"Juicer is not good at all, it spread out I put with little output. Noisy\",\n    \"uploaded_at\": \"2024-09-04 08:24:00\"\n  },\n  {\n    \"id\": 41,\n    \"product_name\": \"Crompton 75 L Desert Air Cooler (White, Teal, ACGC-DAC7\",\n    \"rating\": 1,\n    \"review_summary\": \"Item is good but Delhivery courier service worst.\",\n    \"review_text\": \"Item is good but Delivery service of flipkart Delhivery courier service is worst.\",\n    \"uploaded_at\": \"2024-09-01 23:00:00\"\n  },\n  {\n    \"id\": 42,\n    \"product_name\": \"Crompton Hill Briz Deco 1200 mm 3 Blade Ceiling Fan (Sm\",\n    \"rating\": 3,\n    \"review_summary\": \"Decent product\",\n    \"review_text\": \"I did not receive mounting bracket. I bought 3 ceiling fans of which 2 had mounting bracket but missing in one ceiling fan.\",\n    \"uploaded_at\": \"2024-09-02 15:48:00\"\n  },\n  {\n    \"id\": 43,\n    \"product_name\": \"Crompton 75 L Desert Air Cooler (White, Teal, ACGC-DAC7\",\n    \"rating\": 4,\n    \"review_summary\": \"Delightful\",\n    \"review_text\": \"Product is delivered before time from FK's Gurugram warehouse to Noida. It was received in good condition however few scratches were visible when delivered.Product is very good and working as expected. Cooling 200 sqft drawing room of my flat in hot summer (End of April) of noida city. Cool air circulation can be felt even at far ends of the room. Look of the cooler is also decent (finishing is not that fine at corners) and very easy to move within the room or outside.Full water tank goes e...\",\n    \"uploaded_at\": \"2024-09-02 10:12:00\"\n  },\n  {\n    \"id\": 44,\n    \"product_name\": \"Crompton Hill Briz Deco 1200 mm 3 Blade Ceiling Fan (Sm\",\n    \"rating\": 3,\n    \"review_summary\": \"Decent product\",\n    \"review_text\": \"Not happy with the packing. This chances for damages during Transit.Not good white colour. It's blueish.There is a bend in leaf. It's looks a difected product selling in discount.\",\n    \"uploaded_at\": \"2024-09-06 13:36:00\"\n  },\n  {\n    \"id\": 45,\n    \"product_name\": \"Crompton Hill Briz Deco 1200 mm 3 Blade Ceiling Fan (Sm\",\n    \"rating\": 5,\n    \"review_summary\": \"Highly recommended\",\n    \"review_text\": \"best fan in such a price range.\",\n    \"uploaded_at\": \"2024-09-02 13:00:00\"\n  },\n  {\n    \"id\": 46,\n    \"product_name\": \"Crompton 75 L Desert Air Cooler (White, Teal, ACGC-DAC7\",\n    \"rating\": 2,\n    \"review_summary\": \"Expected a better product\",\n    \"review_text\": \"Not good cooling . Please improve product quality.\",\n    \"uploaded_at\": \"2024-09-01 18:48:00\"\n  },\n  {\n    \"id\": 47,\n    \"product_name\": \"Butterfly Cresta 4 Jars 750 W Food Processor (Turquoise\",\n    \"rating\": 2,\n    \"review_summary\": \"Not good\",\n    \"review_text\": \"Making lot of Noise, not worth for the price and service center no reponse\",\n    \"uploaded_at\": \"2024-09-04 12:36:00\"\n  },\n  {\n    \"id\": 48,\n    \"product_name\": \"Spotzero by Milton Refill (Grey)\",\n    \"rating\": 4,\n    \"review_summary\": \"Pretty good\",\n    \"review_text\": \"The product is good and worthy price... You can surely go for it....\",\n    \"uploaded_at\": \"2024-09-02 04:36:00\"\n  },\n  {\n    \"id\": 49,\n    \"product_name\": \"Crompton 75 L Desert Air Cooler (White, Teal, ACGC-DAC7\",\n    \"rating\": 2,\n    \"review_summary\": \"Not much chilling.just okk\",\n    \"review_text\": \"Buy only if maximum temperature in your city under 40 degree. If more than this temperature doesnt work this cooler.working like a fan,not chilling your room. Not much setisfactory like iron desort cooler. Much disappointed after here temperature of 42-45 degrees.\",\n    \"uploaded_at\": \"2024-09-03 00:12:00\"\n  },\n  {\n    \"id\": 50,\n    \"product_name\": \"PAPILON EMULSION PACK OF 6 BOTTLES 20ML EACH Mixed Frui\",\n    \"rating\": 1,\n    \"review_summary\": \"Waste of money!\",\n    \"review_text\": \"Don't buy. The taste is really bad. It ruined my cake\",\n    \"uploaded_at\": \"2024-09-03 18:24:00\"\n  }\n];\n\nreturn reviews.map(r => ({ json: r }));"
+      },
+      "id": "load-reviews-data-1",
+      "name": "Load 50 Test Reviews",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "split-batches-1",
+      "name": "Loop Through Reviews",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        640,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "for (const item of $input.all()) {\n  let raw = item.json.review_text || '';\n  \n  let cleaned = raw.replace(/<[^>]*>/g, ' ');\n  cleaned = cleaned.replace(/&quot;/g, '\"')\n                   .replace(/&amp;/g, '&')\n                   .replace(/&#39;/g, \"'\")\n                   .replace(/&lt;/g, '<')\n                   .replace(/&gt;/g, '>');\n  cleaned = cleaned.replace(/\\s+/g, ' ').trim();\n  \n  item.json.cleaned_text = cleaned;\n  item.json.raw_text = raw;\n  item.json.product_name = item.json.product_name || 'UNKNOWN_PRODUCT';\n  item.json.rating = parseInt(item.json.rating) || 3;\n}\nreturn $input.all();"
+      },
+      "id": "clean-text-1",
+      "name": "Clean Text (Regex)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        860,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO raw_reviews (product_name, rating, review_summary, review_text)\nVALUES (\n  $${{ $json.product_name }}$$,\n  {{ $json.rating }},\n  $${{ $json.review_summary }}$$,\n  $${{ $json.raw_text }}$$\n)\nRETURNING id;"
+      },
+      "id": "insert-raw-db-1",
+      "name": "Save Raw to Postgres",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        1080,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://router.huggingface.co/hf-inference/models/distilbert/distilbert-base-uncased-finetuned-sst-2-english",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"inputs\": {{ JSON.stringify($('Clean Text (Regex)').first().json.cleaned_text) }}\n}",
+        "options": {}
+      },
+      "id": "hf-sentiment-1",
+      "name": "Hugging Face Sentiment",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1300,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nlet label = 'NEUTRAL';\nlet score = 0.5;\n\ntry {\n  const scores = Array.isArray(response) ? (Array.isArray(response[0]) ? response[0] : response) : [];\n  if (scores.length > 0) {\n    const top = scores.reduce((prev, curr) => (curr.score > prev.score ? curr : prev), scores[0]);\n    label = top.label || 'UNKNOWN';\n    score = parseFloat(top.score || 0.5);\n  }\n} catch (err) {\n  label = 'UNKNOWN';\n  score = 0.5;\n}\n\nreturn [{\n  json: {\n    raw_review_id: $('Save Raw to Postgres').first().json.id,\n    product_name: $('Clean Text (Regex)').first().json.product_name,\n    cleaned_text: $('Clean Text (Regex)').first().json.cleaned_text,\n    sentiment_label: label,\n    sentiment_confidence: score,\n    needs_review: score < 0.60\n  }\n}];"
+      },
+      "id": "parse-hf-1",
+      "name": "Parse Sentiment & Confidence",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1520,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"model\": \"openai/gpt-oss-20b\",\n  \"response_format\": {\n    \"type\": \"json_object\"\n  },\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a product review analyzer. Respond ONLY in valid JSON matching this schema: {\\\"topics\\\": [\\\"topic1\\\", \\\"topic2\\\"], \\\"complaint\\\": \\\"one sentence complaint or null if positive\\\", \\\"summary\\\": \\\"one sentence summary\\\"}. Keep topics to 2-4 short lowercase keywords.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Review: {{ $json.cleaned_text }}\"\n    }\n  ],\n  \"temperature\": 0.2\n}",
+        "options": {}
+      },
+      "id": "groq-llm-1",
+      "name": "Groq LLM (Topics & Complaints)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1740,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const prev = $('Parse Sentiment & Confidence').first().json;\nconst groqRes = $input.first().json;\n\nlet topics = [];\nlet complaint = null;\nlet summary = '';\nlet parseError = false;\n\ntry {\n  const content = groqRes.choices[0].message.content;\n  const parsed = JSON.parse(content);\n  topics = Array.isArray(parsed.topics) ? parsed.topics : [];\n  complaint = parsed.complaint || null;\n  summary = parsed.summary || '';\n} catch (err) {\n  parseError = true;\n  topics = ['general_review'];\n  complaint = 'Extraction note: review details checked';\n  summary = prev.cleaned_text.slice(0, 100) + '...';\n}\n\nreturn [{\n  json: {\n    raw_review_id: prev.raw_review_id,\n    product_name: prev.product_name,\n    sentiment_label: prev.sentiment_label,\n    sentiment_confidence: prev.sentiment_confidence,\n    needs_review: prev.needs_review || parseError,\n    topics: JSON.stringify(topics),\n    complaint_summary: complaint,\n    review_summary: summary\n  }\n}];"
+      },
+      "id": "parse-llm-1",
+      "name": "Safe Parse LLM JSON",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1960,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO processed_reviews (raw_review_id, product_name, sentiment_label, sentiment_confidence, topics, complaint_summary, review_summary, needs_review)\nVALUES (\n  {{ $json.raw_review_id }},\n  $${{ $json.product_name }}$$,\n  $${{ $json.sentiment_label }}$$,\n  {{ $json.sentiment_confidence }},\n  $${{ $json.topics }}$$::jsonb,\n  $${{ $json.complaint_summary }}$$,\n  $${{ $json.review_summary }}$$,\n  {{ $json.needs_review }}\n);"
+      },
+      "id": "insert-processed-db-1",
+      "name": "Save Processed to Postgres",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        2180,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "seconds"
+      },
+      "id": "wait-rate-limit-1",
+      "name": "Wait (Rate Limit)",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2400,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "When clicking \u00e2\u20ac\u02dcTest workflow\u00e2\u20ac\u2122": {
+      "main": [
+        [
+          {
+            "node": "Load 10 Test Reviews",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load 10 Test Reviews": {
+      "main": [
+        [
+          {
+            "node": "Loop Through Reviews",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Through Reviews": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Clean Text (Regex)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clean Text (Regex)": {
+      "main": [
+        [
+          {
+            "node": "Save Raw to Postgres",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Raw to Postgres": {
+      "main": [
+        [
+          {
+            "node": "Hugging Face Sentiment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hugging Face Sentiment": {
+      "main": [
+        [
+          {
+            "node": "Parse Sentiment & Confidence",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Sentiment & Confidence": {
+      "main": [
+        [
+          {
+            "node": "Groq LLM (Topics & Complaints)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq LLM (Topics & Complaints)": {
+      "main": [
+        [
+          {
+            "node": "Safe Parse LLM JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Safe Parse LLM JSON": {
+      "main": [
+        [
+          {
+            "node": "Save Processed to Postgres",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Processed to Postgres": {
+      "main": [
+        [
+          {
+            "node": "Wait (Rate Limit)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait (Rate Limit)": {
+      "main": [
+        [
+          {
+            "node": "Loop Through Reviews",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
