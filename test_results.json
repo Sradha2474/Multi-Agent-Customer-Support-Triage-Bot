@@ -1,0 +1,302 @@
+[
+  {
+    "id": 1,
+    "product_name": "B000G6RYNE",
+    "rating": 4,
+    "sentiment_label": "POSITIVE",
+    "sentiment_confidence": 0.94,
+    "needs_review": false,
+    "topics": [
+      "cheese",
+      "krinkle",
+      "prefer"
+    ],
+    "complaint": "Product did not match buyer expectations",
+    "summary": "They are good but need more cheese and wish they were krinkle cut. I much prefer..."
+  },
+  {
+    "id": 2,
+    "product_name": "B001LO4ZWI",
+    "rating": 1,
+    "sentiment_label": "POSITIVE",
+    "sentiment_confidence": 0.94,
+    "needs_review": false,
+    "topics": [
+      "watered",
+      "perversion",
+      "berry."
+    ],
+    "complaint": "Product did not match buyer expectations",
+    "summary": "A watered down perversion of the acai berry. This juice comes on strong and hars..."
+  },
+  {
+    "id": 3,
+    "product_name": "B000G6RYNE",
+    "rating": 4,
+    "sentiment_label": "POSITIVE",
+    "sentiment_confidence": 0.55,
+    "needs_review": true,
+    "topics": [
+      "these",
+      "chips",
+      "good!!"
+    ],
+    "complaint": "Product did not match buyer expectations",
+    "summary": "These chips are VERY GOOD!! I couldn't stop eating them. They didn't last very l..."
+  },
+  {
+    "id": 4,
+    "product_name": "B001ELL7JM",
+    "rating": 2,
+    "sentiment_label": "POSITIVE",
+    "sentiment_confidence": 0.94,
+    "needs_review": false,
+    "topics": [
+      "vanilla",
+      "flavor",
+      "alcohol"
+    ],
+    "complaint": "Product did not match buyer expectations",
+    "summary": "I like the fact that this vanilla flavor has no alcohol in it so i could add it ..."
+  },
+  {
+    "id": 5,
+    "product_name": "B000J0HIT2",
+    "rating": 2,
+    "sentiment_label": "POSITIVE",
+    "sentiment_confidence": 0.94,
+    "needs_review": false,
+    "topics": [
+      "diappointed",
+      "flavor",
+      "texture"
+    ],
+    "complaint": null,
+    "summary": "I was diappointed in the flavor and texture of this mix. I usually like most of ..."
+  },
+  {
+    "id": 6,
+    "product_name": "B000G6MBX2",
+    "rating": 4,
+    "sentiment_label": "POSITIVE",
+    "sentiment_confidence": 0.94,
+    "needs_review": false,
+    "topics": [
+      "think",
+      "plocky's",
+      "brand"
+    ],
+    "complaint": null,
+    "summary": "I think Plocky's brand as a whole is a cut above in quality but I found these to..."
+  },
+  {
+    "id": 7,
+    "product_name": "B000G6RYNE",
+    "rating": 4,
+    "sentiment_label": "POSITIVE",
+    "sentiment_confidence": 0.94,
+    "needs_review": false,
+    "topics": [
+      "spicy",
+      "chips,",
+      "them."
+    ],
+    "complaint": "Product did not match buyer expectations",
+    "summary": "When I saw the Spicy Thai chips, I knew i had to try them. I love spicy and I lo..."
+  },
+  {
+    "id": 8,
+    "product_name": "B000G6RYNE",
+    "rating": 2,
+    "sentiment_label": "POSITIVE",
+    "sentiment_confidence": 0.94,
+    "needs_review": false,
+    "topics": [
+      "don't",
+      "chips",
+      "received"
+    ],
+    "complaint": null,
+    "summary": "I don't know if it was the case of chips we received or what, but everyone we al..."
+  },
+  {
+    "id": 9,
+    "product_name": "B001HTKZ5S",
+    "rating": 1,
+    "sentiment_label": "NEGATIVE",
+    "sentiment_confidence": 0.94,
+    "needs_review": false,
+    "topics": [
+      "cherrybrook",
+      "kitchen",
+      "tried"
+    ],
+    "complaint": "Product did not match buyer expectations",
+    "summary": "I love Cherrybrook Kitchen and have tried almost all of their products. I was ex..."
+  },
+  {
+    "id": 10,
+    "product_name": "B005R8JE8O",
+    "rating": 5,
+    "sentiment_label": "POSITIVE",
+    "sentiment_confidence": 0.94,
+    "needs_review": false,
+    "topics": [
+      "cannot",
+      "good.",
+      "granted,"
+    ],
+    "complaint": "Product did not match buyer expectations",
+    "summary": "i know i cannot make tea this good. granted, i am not from the south but i know ..."
+  },
+  {
+    "id": 11,
+    "product_name": "B000ITVLE2",
+    "rating": 1,
+    "sentiment_label": "POSITIVE",
+    "sentiment_confidence": 0.94,
+    "needs_review": false,
+    "topics": [
+      "seriously",
+      "product",
+      "tasteless"
+    ],
+    "complaint": null,
+    "summary": "Seriously this product was as tasteless as they come. There are much better tast..."
+  },
+  {
+    "id": 12,
+    "product_name": "B0016PKA1C",
+    "rating": 2,
+    "sentiment_label": "POSITIVE",
+    "sentiment_confidence": 0.94,
+    "needs_review": false,
+    "topics": [
+      "wanted",
+      "product,",
+      "after"
+    ],
+    "complaint": null,
+    "summary": "I wanted very much to like this product, but after using it for more than 9 mont..."
+  },
+  {
+    "id": 13,
+    "product_name": "B0001PB9FE",
+    "rating": 5,
+    "sentiment_label": "NEGATIVE",
+    "sentiment_confidence": 0.94,
+    "needs_review": false,
+    "topics": [
+      "don't",
+      "cactus",
+      "tequila"
+    ],
+    "complaint": null,
+    "summary": "I don't know if it's the cactus or the tequila or just the unique combination of..."
+  },
+  {
+    "id": 14,
+    "product_name": "B000HDMUQ2",
+    "rating": 1,
+    "sentiment_label": "NEGATIVE",
+    "sentiment_confidence": 0.94,
+    "needs_review": false,
+    "topics": [
+      "product",
+      "qualify",
+      "deceptive"
+    ],
+    "complaint": "Product did not match buyer expectations",
+    "summary": "This product must qualify for some sort of deceptive packaging award. The box on..."
+  },
+  {
+    "id": 15,
+    "product_name": "B000G6RYNE",
+    "rating": 4,
+    "sentiment_label": "POSITIVE",
+    "sentiment_confidence": 0.94,
+    "needs_review": false,
+    "topics": [
+      "these",
+      "chips,",
+      "which"
+    ],
+    "complaint": null,
+    "summary": "I love these chips, which is why I bought them, to stock up for the entire schoo..."
+  },
+  {
+    "id": 16,
+    "product_name": "B002BCD2OG",
+    "rating": 4,
+    "sentiment_label": "POSITIVE",
+    "sentiment_confidence": 0.94,
+    "needs_review": false,
+    "topics": [
+      "quality",
+      "nectar.",
+      "tasty."
+    ],
+    "complaint": "Product did not match buyer expectations",
+    "summary": "Good quality nectar. Very tasty. However, I was expecting 46 fluid ounces, not 4..."
+  },
+  {
+    "id": 17,
+    "product_name": "B002SRYRE8",
+    "rating": 5,
+    "sentiment_label": "POSITIVE",
+    "sentiment_confidence": 0.94,
+    "needs_review": false,
+    "topics": [
+      "investment",
+      "ginger.",
+      "unbelievable!"
+    ],
+    "complaint": null,
+    "summary": "The BEST investment I've ever made for ginger. It's unbelievable! It's fibrous l..."
+  },
+  {
+    "id": 18,
+    "product_name": "B003YXWAF8",
+    "rating": 1,
+    "sentiment_label": "NEGATIVE",
+    "sentiment_confidence": 0.94,
+    "needs_review": false,
+    "topics": [
+      "these",
+      "condiments",
+      "overpriced"
+    ],
+    "complaint": null,
+    "summary": "These condiments are overpriced and terrible. The classic is disgustingly sweet...."
+  },
+  {
+    "id": 19,
+    "product_name": "B001GVISJW",
+    "rating": 4,
+    "sentiment_label": "POSITIVE",
+    "sentiment_confidence": 0.94,
+    "needs_review": false,
+    "topics": [
+      "bought",
+      "office",
+      "people"
+    ],
+    "complaint": null,
+    "summary": "I bought this for our office to give people something sweet to snack on. Because..."
+  },
+  {
+    "id": 20,
+    "product_name": "B001GVISJM",
+    "rating": 5,
+    "sentiment_label": "POSITIVE",
+    "sentiment_confidence": 0.94,
+    "needs_review": false,
+    "topics": [
+      "strawberry",
+      "twizzlers",
+      "guilty"
+    ],
+    "complaint": null,
+    "summary": "The Strawberry Twizzlers are my guilty pleasure - yummy. Six pounds will be arou..."
+  }
+]
