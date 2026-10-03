@@ -1,0 +1,39 @@
+# Environment & Secrets (Never commit secrets to GitHub)
+.env
+.env*.local
+*.env
+!*.env.example
+dashboard/.env
+dashboard/.env*.local
+
+# Large Datasets & Binary Databases (Exceeds GitHub 100MB file limit)
+Reviews.csv
+database.sqlite
+NLP_CASE_STUDY/
+*.sqlite
+*.sqlite3
+
+# Dependencies & Package Managers
+node_modules/
+dashboard/node_modules/
+
+# Production Builds
+dist/
+dashboard/dist/
+dist-ssr/
+dashboard/dist-ssr/
+
+# Python Virtual Environments & Cache
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+env/
+
+# System & IDE files
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
