@@ -418,7 +418,7 @@ export default function Hero({
             </span>
           </div>
 
-          {/* Heading Style (Watermelon Display + Newsreader Italic Serif) */}
+          {/* Heading Style (Executive Display + Newsreader Italic Serif) */}
           <h1
             style={{
               fontSize: 'clamp(2.4rem, 4.6vw, 3.9rem)',
