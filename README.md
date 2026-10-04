@@ -10,11 +10,7 @@
 
 > **ReviewPulse AI** is an enterprise-grade automated NLP customer review intelligence platform. It combines a sub-50ms lightweight classifier, a Groq-accelerated Llama 3.1 8B diagnostic engine, automated confidence quality gates, n8n workflow orchestration, and an executive React dashboard.
 
----
 
-![ReviewPulse AI Executive Dashboard](docs/images/dashboard-hero.png)
-
----
 
 ## 📖 Table of Contents
 - [🎯 Executive Overview](#-executive-overview)
